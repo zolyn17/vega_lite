@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "COVID-19 Active Cases (10 Oct 2020)",
+  "title": "World Suicide Cases",
   "width": 800,
   "height": 600,
   "data": {
@@ -14,13 +14,13 @@
       "lookup": "properties.NAME",
       "from": {
         "data": {
-          "url": "https://raw.githubusercontent.com/KaneSec/vega_lite/main/3_choropleth_map/data/covid_10_10_2020.csv"
+          "url": "https://github.com/zolyn17/vega_lite/blob/ae85d8dc6c09d909387cfe9a9903605c809a8be6/3_choropleth_map/data/World_Suicide_Cleaned.csv"
         },
         "key": "Country",
-        "fields": ["Active"]
+        "fields": ["Suicides"]
       }
     },
-    {"calculate": "datum.Active + 0.1", "as": "Active Cases"}
+    {"calculate": "datum.Suicides + 0.1", "as": "Suicide Cases"}
   ],
   "projection": {
     "type": "equirectangular"
@@ -30,13 +30,13 @@
     },
   "encoding": {
     "color": {
-      "field": "Active Cases",
+      "field": "Suicide Cases",
       "type": "quantitative",
       "scale": {"type": "log"}
     },
     "tooltip": [
       {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-      {"field": "Active", "type": "quantitative"}
+      {"field": "Suicides", "type": "quantitative"}
     ]
   }
 
