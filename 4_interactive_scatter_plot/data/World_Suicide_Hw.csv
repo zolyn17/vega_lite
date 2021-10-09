@@ -1,4 +1,4 @@
-Country,Population,Normalised suicide rate,Suicides,GDP Per Capita,Continent
+Country,Population,Normalised suicide rate,Suicides,GDP,Continent
 Dominica,66400,0.000000000,0,17820,North America
 San Marino,78825,0.000050745,4,1931892,Europe
 Saint Kitts and Nevis,117300,0.000000000,0,198900,Africa
