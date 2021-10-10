@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container",
+  "width": "container"
   "title": "Suicide Cases per Country",
   "data": {
     "url": "https://raw.githubusercontent.com/zolyn17/vega_lite/a7deff9a3eec286d81d6e7bf50a7d461dfaf6d7b/4_interactive_scatter_plot/data/World_Suicide_Hw.csv"
