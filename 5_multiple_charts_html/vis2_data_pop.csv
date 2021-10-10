@@ -1,4 +1,4 @@
-﻿country,year,gender,age,suicides_no,population,suicides/100k pop, gdp_for_year ($) ,gdp_per_capita ($),generation,sex,
+﻿country,year,gender,age,suicides_no,population,suicides/100k pop, gdp_for_year ($) ,gdp,generation,sex,
 Albania,1987,male,15-24 years,21,312900,6.71,"2,156,624,900",796,Generation X,1,male
 Albania,1987,male,35-54 years,16,308000,5.19,"2,156,624,900",796,Silent,1,
 Albania,1987,female,15-24 years,14,289700,4.83,"2,156,624,900",796,Generation X,2,
