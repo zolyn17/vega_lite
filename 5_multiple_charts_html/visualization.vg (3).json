@@ -1,0 +1,150 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "title": "A population pyramid showing suicide demographics from 1987 to 2016.",
+  "width": 720,
+  "height": 350,
+  "padding": 5,
+  "signals": [
+    {"name": "chartWidth", "value": 300},
+    {"name": "chartPad", "value": 100},
+    {"name": "width", "update": "2* chartWidth + chartPad"},
+    {
+      "name": "year",
+      "value": 1987,
+      "bind": {"input": "range", "min": 1987, "max": 2016, "step": 1}
+    }
+  ],
+  "data": [
+    {
+      "name": "pop",
+      "url": "https://raw.githubusercontent.com/zolyn17/vega_lite/main/5_multiple_charts_html/vis2_data_pyramid.csv",
+      "format": {"type": "csv", "delimiter": ","}
+    },
+    {
+      "name": "popYear",
+      "source": "pop",
+      "transform": [{"type": "filter", "expr": "datum.year == year"}]
+    },
+    {
+      "name": "males",
+      "source": "popYear",
+      "transform": [{"type": "filter", "expr": "datum.sex == 1"}]
+    },
+    {
+      "name": "females",
+      "source": "popYear",
+      "transform": [{"type": "filter", "expr": "datum.sex == 2"}]
+    },
+    {
+      "name": "ageGroups",
+      "source": "pop",
+      "transform": [{"type": "aggregate", "groupby": ["age"]}]
+    }
+  ],
+  "scales": [
+    {
+      "name": "y",
+      "type": "band",
+      "range": [{"signal": "height"}, 0],
+      "round": true,
+      "domain": {"data": "ageGroups", "field": "age"}
+    },
+    {
+      "name": "c",
+      "type": "ordinal",
+      "domain": [1, 2],
+      "range": ["#89CFF0", "#f4c2c2"]
+    }
+  ],
+  "marks": [
+    {
+      "type": "text",
+      "interactive": false,
+      "from": {"data": "ageGroups"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "chartWidth + chartPad / 2"},
+          "y": {"scale": "y", "field": "age", "band": 0.5},
+          "text": {"field": "age"},
+          "baseline": {"value": "middle"},
+          "align": {"value": "center"},
+          "fill": {"value": "#000"}
+        }
+      }
+    },
+    {
+      "type": "group",
+      "encode": {"update": {"x": {"value": 0}, "height": {"signal": "height"}}},
+      "scales": [
+        {
+          "name": "x",
+          "type": "linear",
+          "range": [{"signal": "chartWidth"}, 0],
+          "nice": true,
+          "zero": true,
+          "domain": {"data": "pop", "field": "suicides_no"}
+        }
+      ],
+      "axes": [
+        {"orient": "bottom", "scale": "x", "format": "s", "title": "Females"}
+      ],
+      "marks": [
+        {
+          "type": "rect",
+          "from": {"data": "females"},
+          "encode": {
+            "enter": {
+              "x": {"scale": "x", "field": "suicides_no"},
+              "x2": {"scale": "x", "value": 0},
+              "y": {"scale": "y", "field": "age"},
+              "height": {"scale": "y", "band": 1, "offset": -1},
+              "fillOpacity": {"value": 1},
+              "fill": {"scale": "c", "field": "sex"},
+              "color": {"value": "#ff979f"}
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "x": {"signal": "chartWidth + chartPad"},
+          "height": {"signal": "height"}
+        }
+      },
+      "scales": [
+        {
+          "name": "x",
+          "type": "linear",
+          "range": [0, {"signal": "chartWidth"}],
+          "nice": true,
+          "zero": true,
+          "domain": {"data": "pop", "field": "suicides_no"}
+        }
+      ],
+      "axes": [
+        {"orient": "bottom", "scale": "x", "format": "s", "title": "Males"}
+      ],
+      "marks": [
+        {
+          "type": "rect",
+          "from": {"data": "males"},
+          "encode": {
+            "enter": {
+              "x": {"scale": "x", "field": "suicides_no"},
+              "x2": {"scale": "x", "value": 0},
+              "y": {"scale": "y", "field": "age"},
+              "height": {"scale": "y", "band": 1, "offset": -1},
+              "fillOpacity": {"value": 1},
+              "fill": {"scale": "c", "field": "sex"},
+              "color": {"value": "#ff979f"}
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {}
+}
