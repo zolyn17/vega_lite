@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "title": "A population pyramid showing suicide demographics from 1987 to 2016.",
-  "height": 400,
+  "width": "container",
   "padding": 5,
   "signals": [
     {"name": "chartWidth", "value": 300},

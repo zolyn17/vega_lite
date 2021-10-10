@@ -1,0 +1,20 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "title": "Suicides Cases based on generation",
+  "data": {
+    "url": "https://raw.githubusercontent.com/zolyn17/vega_lite/main/vis2_data.csv"
+  },
+  "mark": {"type": "line", "point": true},
+  "encoding": {
+    "x": {"timeUnit": "year", "title": "Year", "field": "year"},
+    "y": {
+      "aggregate": "mean",
+      "title": "Average number of suicide cases",
+      "field": "suicides_no",
+      "type": "quantitative"
+    },
+    "color": {"field": "generation", "type": "nominal"}
+  },
+  "config": {}
+}
